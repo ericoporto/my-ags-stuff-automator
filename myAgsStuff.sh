@@ -1,11 +1,5 @@
 #!/bin/bash
- 
-if [ "$1" != "" ] && [ "$1" != "markdown" ]; then
-    DO_MARKDOWN=0
-else
-    DO_MARKDOWN=1
-fi 
- 
+  
 scriptModules=(
     "math3d" "A script module for 3D math on Adventure Game Studio." 
     "rellax" "Rellax camera tracks with parallax, adds smooth scroll."
@@ -41,6 +35,12 @@ forksWithCirrusCiIntegration=(
     "ags" "personal fork of ags where I do development experiments."
     "lib-allegro" "personal fork of lib-allegro for experimenting."    
 )
+
+if [ "$1" != "" ] && [ "$1" != "markdown" ]; then
+    DO_MARKDOWN=0
+else
+    DO_MARKDOWN=1
+fi 
 
 function printH1() {
   if [ ${DO_MARKDOWN} -eq 1 ]; then
