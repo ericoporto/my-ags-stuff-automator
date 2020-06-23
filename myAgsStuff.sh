@@ -35,8 +35,8 @@ forksWithAzureIntegration=(
 )
 
 forksWithCirrusCiIntegration=(
-    "ags" "personal fork of ags where I do development experiments."
-    "lib-allegro" "personal fork of lib-allegro for experimenting."    
+    "ags" "personal fork of ags where I do development experiments." ""
+    "lib-allegro" "personal fork of lib-allegro for experimenting."  ""
 )
 
 if [ "$1" != "" ] && [ "$1" != "markdown" ]; then
