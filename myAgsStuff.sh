@@ -1,5 +1,7 @@
 #!/bin/bash
   
+intro="Using AGS for some time now, decided to look everything I open sourced and create a listing here! I will try to keep this list updated!"  
+  
 scriptModules=(
     "math3d" "A script module for 3D math on Adventure Game Studio." 
     "rellax" "Rellax camera tracks with parallax, adds smooth scroll."
@@ -42,6 +44,10 @@ else
     DO_MARKDOWN=1
 fi 
 
+printText() {
+  echo "$1"
+}
+
 function printH1() {
   if [ ${DO_MARKDOWN} -eq 1 ]; then
       echo "# $1"
@@ -77,7 +83,6 @@ function printWithAzurePipelines() {
 [/list][/list]"         
           fi
       done
-   echo ""
 }
 
 function printWithCirrusCiPipelines() {
@@ -96,7 +101,6 @@ function printWithCirrusCiPipelines() {
 [/list][/list]"   
           fi
       done
-   echo ""
 }
 
 function printWithReleasesOnly() {
@@ -115,10 +119,10 @@ function printWithReleasesOnly() {
 [/list][/list]"                
           fi
       done
-   echo ""
 }
 
 printH1 "eri0o's Adventure Game Studio Repositories!"
+printText "${intro}"
 echo ""
  
 printH2 "Script Modules"
