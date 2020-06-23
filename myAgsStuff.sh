@@ -1,5 +1,11 @@
 #!/bin/bash
  
+if [ "$1" != "" ] && [ "$1" != "markdown" ]; then
+    DO_MARKDOWN=0
+else
+    DO_MARKDOWN=1
+fi 
+ 
 scriptModules=(
     "math3d" "A script module for 3D math on Adventure Game Studio." 
     "rellax" "Rellax camera tracks with parallax, adds smooth scroll."
@@ -21,7 +27,7 @@ agsPluginsWithAzureIntegration=(
 )
  
 agsEditorPluginsWithAzureIntegration=(
-    "agsModuleList" "includes both the [agsModuleList website](https://ericoporto.github.io/agsModuleList/) and the agsget Editor Plugin, which makes finding and downloading AGS Modules easy. If you want to update or add your module, open a PR. Any questions, open an issue."
+    "agsModuleList" "includes both the agsModuleList website and the agsget Editor Plugin, which makes finding and downloading AGS Modules easy. If you want to update or add your module, open a PR. Any questions, open an issue."
 )
 
 forksWithAzureIntegration=(
@@ -35,16 +41,41 @@ forksWithCirrusCiIntegration=(
     "ags" "personal fork of ags where I do development experiments."
     "lib-allegro" "personal fork of lib-allegro for experimenting."    
 )
+
+function printH1() {
+  if [ ${DO_MARKDOWN} -eq 1 ]; then
+      echo "# $1"
+  else
+      echo "[size=16pt][b] $1 [/b][/size]"      
+  fi 
+  echo ""
+}
+
+function printH2() {
+  if [ ${DO_MARKDOWN} -eq 1 ]; then
+      echo "## $1"  
+  else
+      echo "[size=12pt][b] $1 [/b][/size]"
+  fi 
+  echo ""
+}
+
  
 function printWithAzurePipelines() {
    arr=("$@")
    for ((i=0;i< ${#arr[@]} ;i+=2));
-      do      
+      do    
           reponame="${arr[i]}"
           description="${arr[i+1]}"
-          echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [![Build Status](https://dev.azure.com/ericoporto/${reponame}/_apis/build/status/ericoporto.${reponame}?branchName=master)](https://dev.azure.com/ericoporto/${reponame}/_build/latest?definitionId=12&branchName=master) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases)"
-          echo "  - ${description}"
-          echo ""
+          if [ ${DO_MARKDOWN} -eq 1 ]; then       
+              echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [![Build Status](https://dev.azure.com/ericoporto/${reponame}/_apis/build/status/ericoporto.${reponame}?branchName=master)](https://dev.azure.com/ericoporto/${reponame}/_build/latest?definitionId=12&branchName=master) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases)"
+              echo "  - ${description}"
+              echo ""
+          else
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b]| [url=https://dev.azure.com/ericoporto/${reponame}/_build/latest?definitionId=12&branchName=master][img]https://dev.azure.com/ericoporto/${reponame}/_apis/build/status/ericoporto.${reponame}?branchName=master[/img][/url] | [u][url=https://github.com/ericoporto/${reponame}/releases][tt]Downloads ⇩[/tt][/url][/u][/li][list]
+[li]${description}[/li]
+[/list][/list]"         
+          fi
       done
    echo ""
 }
@@ -55,9 +86,15 @@ function printWithCirrusCiPipelines() {
       do      
           reponame="${arr[i]}"
           description="${arr[i+1]}"
-          echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [![Build Status](https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg)](https://cirrus-ci.com/github/ericoporto/${reponame})"
-          echo "  - ${description}"
-          echo ""
+          if [ ${DO_MARKDOWN} -eq 1 ]; then   
+              echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [![Build Status](https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg)](https://cirrus-ci.com/github/ericoporto/${reponame})"
+              echo "  - ${description}"
+              echo ""
+          else
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [url=https://cirrus-ci.com/github/ericoporto/${reponame}][img]Build Status](https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg[/img][/url][/li][list]
+[li]${description}[/li]
+[/list][/list]"   
+          fi
       done
    echo ""
 }
@@ -68,29 +105,35 @@ function printWithReleasesOnly() {
       do
           reponame="${arr[i]}"
           description="${arr[i+1]}"
-          echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases)"
-          echo "  - ${description}"
-          echo ""
+          if [ ${DO_MARKDOWN} -eq 1 ]; then  
+              echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases)"
+              echo "  - ${description}"
+              echo ""
+          else
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [u][url=https://github.com/ericoporto/${reponame}/releases][tt]Downloads ⇩[/tt][/url][/u][/li][list]
+[li]${description}[/li]
+[/list][/list]"                
+          fi
       done
    echo ""
 }
 
-echo "# eri0o's Adventure Game Studio Repositories!"
+printH1 "eri0o's Adventure Game Studio Repositories!"
 echo ""
  
-echo "## Script Modules"
+printH2 "Script Modules"
 printWithReleasesOnly "${scriptModules[@]}"
 echo ""
  
-echo "## Engine Plugins"
+printH2 "Engine Plugins"
 printWithAzurePipelines "${agsPluginsWithAzureIntegration[@]}"
 echo ""
 
-echo "## Editor Plugins"
+printH2 "Editor Plugins"
 printWithAzurePipelines "${agsEditorPluginsWithAzureIntegration[@]}"
 echo ""
 
-echo "## Forks"
+printH2 "Forks"
 printWithAzurePipelines "${forksWithAzureIntegration[@]}"
 
 printWithCirrusCiPipelines "${forksWithCirrusCiIntegration[@]}"
