@@ -92,7 +92,7 @@ function printWithAzurePipelines() {
           reponame="${arr[i]}"
           description="${arr[i+1]}"
           ciname="${arr[i+2]}"
-          if [ "$ciname" == "" ]; then   
+          if [ ! -n "$ciname" ]; then   
             ciname="${reponame}"
           fi          
           
