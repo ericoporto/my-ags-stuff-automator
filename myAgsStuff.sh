@@ -1,6 +1,7 @@
 #!/bin/bash
   
-intro="Using AGS for some time now, decided to look everything I open sourced and create a listing here! I will try to keep this list updated!"  
+intro="Using AGS for some time now, here's a list of things I made!"
+footnote=("Thank you for reading this list. If something is broken or needs changes, open an issue or hit me up on the forums." "https://gist.github.com/ericoporto/a3d437af481a14609cfbef95e7a9a293" "https://gist.githubusercontent.com/ericoporto/6426d9e819f4eccb74c4f47f6d7dfcb5/raw/93007937e87d7de6e35b29382e1bfbe49bb5cc90/README.BBCode" "https://github.com/ericoporto/my-ags-stuff-automator")
   
 scriptModules=(
     "math3d" "A script module for 3D math on Adventure Game Studio." 
@@ -66,6 +67,23 @@ function printH2() {
   echo ""
 }
 
+
+function writeFootNote() {
+   arr=("$@")
+   footnote_text="${arr[0]}"
+   link_gist_markdown="${arr[1]}"
+   link_gist_bbcode="${arr[2]}"
+   link_github_repo="${arr[3]}"
+   if [ ${DO_MARKDOWN} -eq 1 ]; then
+       echo "$footnote_text"
+       echo ""
+       echo "[Markdown]($link_gist_markdown) | [PHP BB]($link_gist_bbcode) | [Repo]($link_github_repo)"
+   else
+       echo "$footnote_text"
+       echo "[url=$link_gist_markdown]Markdown version[/url] | [url=$link_github_repo]GitHub repo for this[/url]"
+       
+   fi
+}
  
 function printWithAzurePipelines() {
    arr=("$@")
@@ -142,5 +160,5 @@ printWithAzurePipelines "${forksWithAzureIntegration[@]}"
 
 printWithCirrusCiPipelines "${forksWithCirrusCiIntegration[@]}"
 echo ""
- 
 
+writeFootNote "${footnote[@]}"
