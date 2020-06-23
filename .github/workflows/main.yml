@@ -23,10 +23,13 @@ jobs:
     - uses: actions/checkout@v2
 
     # Runs a single command using the runners shell
-    - name: Run a one-line script
+    - name: Generate Gist in Markdown format
       run: ./myAgsStuff.sh > new_gist.md
+        
+    - name: Generate Gist in BBCode format
+      run: ./myAgsStuff.sh bbcode > new_gist.BBCode
 
-    - name: gist-sync
+    - name: gist-sync Markdown
       uses: Popsiclestick/gist-sync-action@v1.0.0
       with:
         # Auth token with gist permissions
@@ -39,3 +42,17 @@ jobs:
         gist_description: ☕eri0o's Adventure Game Studio Repositories!
         # The Filename with the contents we want to mirror
         github_file: new_gist.md
+
+    - name: gist-sync BBCode
+      uses: Popsiclestick/gist-sync-action@v1.0.0
+      with:
+        # Auth token with gist permissions
+        auth: ${{ secrets.MY_GIST_TK }}
+        # URL of the gist
+        gist_url: https://gist.github.com/ericoporto/6426d9e819f4eccb74c4f47f6d7dfcb5
+        # Title of the gist
+        gist_title: README.BBCode
+        # Description of the gist
+        gist_description: ☕eri0o's Adventure Game Studio Repositories (BBCode Edition)!
+        # The Filename with the contents we want to mirror
+        github_file: new_gist.BBCode
