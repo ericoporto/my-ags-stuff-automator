@@ -19,8 +19,8 @@ scriptModules=(
 agsPluginsWithAzureIntegration=(
     "agsimgui" "An ImGui plugin for Adventure Game Studio, so you can create beautiful and fast GUIs using AGS Script." ""
     "agsbox2d" "AgsBox2D is a physics plugin for Adventure Game Studio that gives access to the Box2D library created by Erin Catto. API is more inspired in the one used in Löve than the original Box2D one." ""
-    "agssqlite" "AGS Fast Wave Function Collapse Plugin, makes magical self fiting tile patterns!"  ""
-    "agsfastwfc" "SQLite plugin for Adventure Game Studio, adds way to store and retrieve information from local SQLite databases!" ""
+    "agssqlite" "SQLite plugin for Adventure Game Studio, adds way to store and retrieve information from local SQLite databases!"  ""
+    "agsfastwfc" "AGS Fast Wave Function Collapse Plugin, makes magical self fiting tile patterns!" ""
 )
 
 agsPluginsWithTravisIntegration=(
