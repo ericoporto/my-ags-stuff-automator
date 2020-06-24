@@ -175,10 +175,10 @@ function printWithCirrusCiPipelines() {
               echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [![Build Status](https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg)](https://cirrus-ci.com/github/ericoporto/${reponame})"
               echo "  - ${description}"
               echo ""
-          else
-              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [url=https://cirrus-ci.com/github/ericoporto/${reponame}][img]https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg[/img][/url][/li][list]
-[li]${description}[/li]
-[/list][/list]"   
+#          else
+#              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [url=https://cirrus-ci.com/github/ericoporto/${reponame}][img]https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg[/img][/url][/li][list]
+#[li]${description}[/li]
+#[/list][/list]"   
           fi
       done
 }
