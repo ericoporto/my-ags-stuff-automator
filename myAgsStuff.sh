@@ -1,7 +1,7 @@
 #!/bin/bash
   
 intro="Using AGS for some time now, here's a list of things I made!"
-footnote=("Thank you for reading this list. If something is broken or needs changes, open an issue or hit me up on the forums." "https://gist.github.com/ericoporto/a3d437af481a14609cfbef95e7a9a293" "https://gist.githubusercontent.com/ericoporto/6426d9e819f4eccb74c4f47f6d7dfcb5/raw/README.BBCode" "https://github.com/ericoporto/my-ags-stuff-automator")
+footnote=("Thank you for reading this list." "https://gist.github.com/ericoporto/a3d437af481a14609cfbef95e7a9a293" "https://gist.githubusercontent.com/ericoporto/6426d9e819f4eccb74c4f47f6d7dfcb5/raw/README.BBCode" "https://github.com/ericoporto/my-ags-stuff-automator")
   
 scriptModules=(
     "math3d" "A script module for 3D math on Adventure Game Studio."  ""
@@ -22,9 +22,19 @@ agsPluginsWithAzureIntegration=(
     "agssqlite" "AGS Fast Wave Function Collapse Plugin, makes magical self fiting tile patterns!"  ""
     "agsfastwfc" "SQLite plugin for Adventure Game Studio, adds way to store and retrieve information from local SQLite databases!" ""
 )
+
+agsPluginsWithTravisIntegration=(
+    "agsjoy" "Reverse engineered version of the agsjoy plugin, includes Linux port." ""
+    "agsshell" "AGS Shell plugin for Linux and Windows, run command line from ags." ""
+)
  
 agsEditorPluginsWithAzureIntegration=(
     "agsModuleList" "includes both the agsModuleList website and the agsget Editor Plugin, which makes finding and downloading AGS Modules easy. If you want to update or add your module, open a PR. Any questions, open an issue." "agsget"
+)
+
+openSourceGames=(
+    "dogfromhell" "Hell's Puppy" "https://bakudas.itch.io/hells-puppy"
+    "DungeonHands" "Dungeon Hands" "https://eri0o.itch.io/dungeon-hands"
 )
 
 forksWithAzureIntegration=(
@@ -38,6 +48,7 @@ forksWithCirrusCiIntegration=(
     "ags" "personal fork of ags where I do development experiments." ""
     "lib-allegro" "personal fork of lib-allegro for experimenting."  ""
 )
+
 
 if [ "$1" != "" ] && [ "$1" != "markdown" ]; then
     DO_MARKDOWN=0
@@ -67,6 +78,22 @@ function printH2() {
   echo ""
 }
 
+function printOpenSourceGames() {
+   arr=("$@")
+   for ((i=0;i< ${#arr[@]} ;i+=3));
+      do    
+          reponame="${arr[i]}"
+          gamename="${arr[i+1]}"
+          website="${arr[i+2]}"          
+          
+          if [ ${DO_MARKDOWN} -eq 1 ]; then       
+              echo "- [${gamename}](https://github.com/ericoporto/${reponame}) | [**\`Game Download Page⇩\`**](${website})"
+              echo ""
+          else
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${gamename}[/url][/b] | [u][url=${website}][tt]Game Download Page ⇩[/tt][/url][/u][/li][/list]"         
+          fi
+      done
+}
 
 function writeFootNote() {
    arr=("$@")
@@ -76,6 +103,7 @@ function writeFootNote() {
    link_github_repo="${arr[3]}"
    if [ ${DO_MARKDOWN} -eq 1 ]; then
        echo "$footnote_text"
+       echo "If something is broken or needs changes, open an issue or hit me up on the forums."
        echo ""
        echo "[Markdown]($link_gist_markdown) | [PHP BB]($link_gist_bbcode) | [Repo]($link_github_repo)"
    else
@@ -97,11 +125,11 @@ function printWithAzurePipelines() {
           fi          
           
           if [ ${DO_MARKDOWN} -eq 1 ]; then       
-              echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [![Build Status](https://dev.azure.com/ericoporto/${ciname}/_apis/build/status/ericoporto.${reponame}?branchName=master)](https://dev.azure.com/ericoporto/${ciname}/_build/latest?definitionId=12&branchName=master) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases)"
+              echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases) | [![Build Status](https://dev.azure.com/ericoporto/${ciname}/_apis/build/status/ericoporto.${reponame}?branchName=master)](https://dev.azure.com/ericoporto/${ciname}/_build/latest?definitionId=12&branchName=master)"
               echo "  - ${description}"
               echo ""
           else
-              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b]| [url=https://dev.azure.com/ericoporto/${ciname}/_build/latest?definitionId=12&branchName=master][img]https://dev.azure.com/ericoporto/${ciname}/_apis/build/status/ericoporto.${reponame}?branchName=master[/img][/url] | [u][url=https://github.com/ericoporto/${reponame}/releases][tt]Downloads ⇩[/tt][/url][/u][/li][list]
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [u][url=https://github.com/ericoporto/${reponame}/releases][tt]Downloads ⇩[/tt][/url][/u] | [url=https://dev.azure.com/ericoporto/${ciname}/_build/latest?definitionId=12&branchName=master][img]https://dev.azure.com/ericoporto/${ciname}/_apis/build/status/ericoporto.${reponame}?branchName=master[/img][/url][/li][list]
 [li]${description}[/li]
 [/list][/list]"         
           fi
@@ -120,7 +148,26 @@ function printWithCirrusCiPipelines() {
               echo "  - ${description}"
               echo ""
           else
-              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [url=https://cirrus-ci.com/github/ericoporto/${reponame}][img]Build Status](https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg[/img][/url][/li][list]
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [url=https://cirrus-ci.com/github/ericoporto/${reponame}][img]https://api.cirrus-ci.com/github/ericoporto/${reponame}.svg[/img][/url][/li][list]
+[li]${description}[/li]
+[/list][/list]"   
+          fi
+      done
+}
+
+function printWithTravisCiPipelines() {
+   arr=("$@")
+   for ((i=0;i< ${#arr[@]} ;i+=3));
+      do      
+          reponame="${arr[i]}"
+          description="${arr[i+1]}"
+             
+          if [ ${DO_MARKDOWN} -eq 1 ]; then   
+              echo "- [${reponame}](https://github.com/ericoporto/${reponame}) | [**\`Downloads ⇩\`**](https://github.com/ericoporto/${reponame}/releases) | [![Build Status](https://travis-ci.org/ericoporto/${reponame}.svg?branch=master)](https://travis-ci.org/ericoporto/${reponame})"
+              echo "  - ${description}"
+              echo ""
+          else
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${reponame}[/url][/b] | [u][url=https://github.com/ericoporto/${reponame}/releases][tt]Downloads ⇩[/tt][/url][/u] | [url=https://travis-ci.org/ericoporto/${reponame}][img]https://travis-ci.org/ericoporto/${reponame}.svg?branch=master[/img][/url][/li][list]
 [li]${description}[/li]
 [/list][/list]"   
           fi
@@ -156,10 +203,15 @@ echo ""
  
 printH2 "Engine Plugins"
 printWithAzurePipelines "${agsPluginsWithAzureIntegration[@]}"
+printWithTravisCiPipelines "${agsPluginsWithTravisIntegration[@]}"
 echo ""
 
 printH2 "Editor Plugins"
 printWithAzurePipelines "${agsEditorPluginsWithAzureIntegration[@]}"
+echo ""
+
+printH2 "Open Source Games"
+printOpenSourceGames "${openSourceGames[@]}"
 echo ""
 
 printH2 "Forks"
