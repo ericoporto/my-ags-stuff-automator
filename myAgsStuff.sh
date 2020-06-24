@@ -38,7 +38,7 @@ openSourceGames=(
 )
 
 miscellaneousRepo=(
-    "teafortwo" "Tea for Two Android Studio Project" "This repository may be useful for one porting their own AGS game to Android. I added an README that tries to go throgh things step by step"
+    "teafortwo" "Tea for Two Android Studio Project" "This repository may be useful for one porting their own AGS game to Android. I added a README that tries to go throgh things step by step"
     "ags-script-language-server" "AGS Script Language Server"  "WIP AGS Script LSP for code analysis in LSP capable IDEs. Typescript code, need help!"
     "ags-choco-pkg" "Adventure Game Studio Chocolatey package" "Packaging code for AGS on Chocolatey, the other Windows package manager."
     "ash2doc" "ash2doc" "From ashes to documentation, turn AGS Script Header files into friendly text in Markdown or BBCode. WIP, JS, help needed."
