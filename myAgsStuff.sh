@@ -37,6 +37,13 @@ openSourceGames=(
     "DungeonHands" "Dungeon Hands" "https://eri0o.itch.io/dungeon-hands"
 )
 
+miscellaneousRepo=(
+    "teafortwo" "Tea for Two Android Studio Project" "This repository may be useful for one porting their own AGS game to Android. I added an README that tries to go throgh things step by step"
+    "ags-script-language-server" "AGS Script Language Server"  "WIP AGS Script LSP for code analysis in LSP capable IDEs. Typescript code, need help!"
+    "ags-choco-pkg" "Adventure Game Studio Chocolatey package" "Packaging code for AGS on Chocolatey, the other Windows package manager."
+    "ash2doc" "ash2doc" "From ashes to documentation, turn AGS Script Header files into friendly text in Markdown or BBCode. WIP, JS, help needed."
+)
+
 forksWithAzureIntegration=(
     "AGS-Controller" "AGS-Controller is a SDL2 Gamepad plugin for AGS, this fork has CI integration to provide automatic cross platform builds." "agscontroller"
     "AGSWaves" "AGSWaves provides helpful features to work around ags3 sound limitation and other things. This fork has CI integration to provide automatic cross platform builds." ""
@@ -77,6 +84,27 @@ function printH2() {
   fi 
   echo ""
 }
+
+
+function printMiscellaneous() {
+   arr=("$@")
+   for ((i=0;i< ${#arr[@]} ;i+=3));
+      do    
+          reponame="${arr[i]}"
+          humanname="${arr[i+1]}"
+          description="${arr[i+2]}"          
+          
+          if [ ${DO_MARKDOWN} -eq 1 ]; then       
+              echo "- [${humanname}](https://github.com/ericoporto/${reponame}) "
+              echo "  - ${description}"
+              echo ""
+          else
+              echo "[list][li][b][url=https://github.com/ericoporto/${reponame}]${humanname}[/url][/b][/li][list]
+[li]${description}[/li]
+[/list][/list]"         
+          fi
+      done
+}     
 
 function printOpenSourceGames() {
    arr=("$@")
@@ -214,9 +242,12 @@ printH2 "Open Source Games"
 printOpenSourceGames "${openSourceGames[@]}"
 echo ""
 
+printH2 "Miscellaneous"
+printMiscellaneous "${miscellaneousRepo[@]}"
+echo ""
+
 printH2 "Forks"
 printWithAzurePipelines "${forksWithAzureIntegration[@]}"
-
 printWithCirrusCiPipelines "${forksWithCirrusCiIntegration[@]}"
 echo ""
 
