@@ -39,6 +39,7 @@ openSourceGames=(
 )
 
 miscellaneousRepo=(
+    "agsconfig" "cross platform setup GUI for AGS games" "easy to customize, similar to the traditional winsetup.exe, for any platform"
     "teafortwo" "Tea for Two Android Studio Project" "This repository may be useful for one porting their own AGS game to Android. I added a README that tries to go throgh things step by step"
     "ags-script-language-server" "AGS Script Language Server"  "WIP AGS Script LSP for code analysis in LSP capable IDEs. Typescript code, need help!"
     "ags-choco-pkg" "Adventure Game Studio Chocolatey package" "Packaging code for AGS on Chocolatey, the other Windows package manager."
