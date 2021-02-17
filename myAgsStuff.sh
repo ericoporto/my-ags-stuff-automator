@@ -4,6 +4,7 @@ intro="Using AGS for some time now, here's a list of things I made!"
 footnote=("Thank you for reading this list." "https://gist.github.com/ericoporto/a3d437af481a14609cfbef95e7a9a293" "https://gist.githubusercontent.com/ericoporto/6426d9e819f4eccb74c4f47f6d7dfcb5/raw/README.BBCode" "https://github.com/ericoporto/my-ags-stuff-automator")
   
 scriptModules=(
+    "ImGi" "Immediate GuI script module using Overlays for AGS." ""
     "math3d" "A script module for 3D math on Adventure Game Studio."  ""
     "rellax" "Rellax camera tracks with parallax, adds smooth scroll." ""
     "controlz" "Move your character with keyboard or joystick controlz for Adventure Game Studio." ""
