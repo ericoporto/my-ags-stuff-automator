@@ -9,7 +9,7 @@ scriptModules=(
     "rellax" "Rellax camera tracks with parallax, adds smooth scroll." ""
     "controlz" "Move your character with keyboard or joystick controlz for Adventure Game Studio." ""
     "arrowselect" "Select things using arrows, module for in point and click games made with Adventure Game Studio." ""
-    "ags_test_game" "Example of Test Anything Protocol usage with Adventure Game Studio." ""
+    "tap" "Module for Test Anything Protocol with Adventure Game Studio." ""
     "jsonparser" "a JSON minimal parser for Adventure Game Studio."  ""
     "resizablegui" "Resizable GUIs module for Adventure Game Studio with optional mouse controls for resizing." ""
     "SierraSpeech" "AGS module for Sierra style conversations forked from speech bubble." ""
