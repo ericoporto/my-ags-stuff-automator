@@ -18,6 +18,7 @@ scriptModules=(
 ) 
 
 agsPluginsWithAzureIntegration=(
+    "agsserialport" "A Serial Port plugin for AGS, useful for using Arduino with Adventure Game Studio" ""
     "agsimgui" "An ImGui plugin for Adventure Game Studio, so you can create beautiful and fast GUIs using AGS Script." ""
     "agsbox2d" "AgsBox2D is a physics plugin for Adventure Game Studio that gives access to the Box2D library created by Erin Catto. API is more inspired in the one used in Löve than the original Box2D one." ""
     "agssqlite" "SQLite plugin for Adventure Game Studio, adds way to store and retrieve information from local SQLite databases!"  ""
