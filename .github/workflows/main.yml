@@ -35,7 +35,7 @@ jobs:
         # Auth token with gist permissions
         auth: ${{ secrets.MY_GIST_TK }}
         # URL of the gist
-        gist_url: https://gist.github.com/ericoporto/a3d437af481a14609cfbef95e7a9a293
+        gist_url: https://gist.github.com/ericoporto/f9e1c47e479cb86d5bdfc5c04126d9dd
         # Title of the gist
         gist_title: README.md
         # Description of the gist
