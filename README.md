@@ -1,5 +1,5 @@
 # my-ags-stuff-automator
-automator to update list of ags things
+automator to update my list of ags things
 
 This script fills the list in these gists:
 - (Markdown) https://gist.github.com/ericoporto/f9e1c47e479cb86d5bdfc5c04126d9dd
